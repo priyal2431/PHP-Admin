@@ -52,7 +52,7 @@ include('index.php');
                 <div class="col-12 col-md-6 col-lg-4">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Total Users123</h5>
+                            <h5 class="card-title">Total Users</h5>
                             <div class="card-value">1,234</div>
                         </div>
                     </div>
