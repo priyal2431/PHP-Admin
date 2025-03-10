@@ -48,6 +48,9 @@ $(document).ready(function () {
         else if (fieldType.includes("max") && value.length > maxLength) {
             errorMessage = `Must be less than ${maxLength} characters.`;
         }
+        else if (fieldType.includes("description") && value.length < 10) {
+            errorMessage = "Description must be at least 10 characters long.";
+        }
 
         else if (fieldType.includes("file")) {
             let file = field[0].files[0];
@@ -73,7 +76,7 @@ $(document).ready(function () {
         }
     }
 
-    $("input, select").on("blur", function () {
+    $("input, select, textarea").on("blur", function () {
         validateField(this);
     });
 
@@ -93,15 +96,14 @@ $(document).ready(function () {
             e.stopPropagation(); 
         } else {
             
-            form.find("button[type='submit']").prop("disabled", true);
         }
     });
 
-    $("#submitUserForm, #submitCategoryForm","#productForm").on("click", function (e) {
+    $("#submitUserForm, #submitCategoryForm","#productForm","#addInquiryForm","#addOrderForm").on("click", function (e) {
         let form = $(this).closest("form");
         let isValid = true;
 
-        form.find("input, select").each(function () {
+        form.find("input, select, textarea").each(function () {
             validateField(this);
             if ($(this).hasClass("is-invalid")) {
                 isValid = false;

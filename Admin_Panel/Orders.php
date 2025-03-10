@@ -1,5 +1,11 @@
 <?php include("index.php"); ?>
 
+<script src="validation.js"></script>
+<script src="jquery-3.7.1.min.js"></script>
+<script src="jquery.validate.min.js"></script>
+<script src="additional-methods.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+
 <style>
     .table-container {
         padding: 20px;
@@ -158,37 +164,46 @@
                         <form id="addOrderForm">
                             <div class="mb-3">
                                 <label for="orderId" class="form-label">Order ID</label>
-                                <input type="text" class="form-control" id="orderId" name="orderId" >
+                                <input type="text" class="form-control" id="orderId" name="orderId" data-validation="required alphanumeric">
+                                <span class="text-danger" id="orderIdError"></span>
                             </div>
                             <div class="mb-3">
                                 <label for="fullName" class="form-label">Full Name</label>
-                                <input type="text" class="form-control" id="fullName" name="fullName">
+                                <input type="text" class="form-control" id="fullName" name="fullName" data-validation="required alpha">
+                                <span class="text-danger" id="fullNameError"></span>
                             </div>
                             <div class="mb-3">
                                 <label for="productName" class="form-label">Product Name</label>
-                                <input type="text" class="form-control" id="productName" name="productName">
+                                <input type="text" class="form-control" id="productName" name="productName" data-validation="required alpha">
+                                <span class="text-danger" id="productNameError"></span>
                             </div>
                             <div class="mb-3">
                                 <label for="price" class="form-label">Price</label>
-                                <input type="text" class="form-control" id="price" name="price">
+                                <input type="text" class="form-control" id="price" name="price" data-validation="required numeric">
+                                <span class="text-danger" id="priceError"></span>
                             </div>
                             <div class="mb-3">
                                 <label for="orderDate" class="form-label">Order Date</label>
-                                <input type="date" class="form-control" id="orderDate" name="orderDate">
+                                <input type="date" class="form-control" id="orderDate" name="orderDate" data-validation="required">
+                                <span class="text-danger" id="orderDateError"></span>
                             </div>
                             <div class="mb-3">
                                 <label for="orderStatus" class="form-label">Order Status</label>
-                                <select class="form-control" id="orderStatus" name="orderStatus">
+                                <select class="form-control" id="orderStatus" name="orderStatus" data-validation="required">
+                                    <option value="">Select Status</option>
                                     <option value="Not Delivered">Not Delivered</option>
                                     <option value="Delivered">Delivered</option>
                                 </select>
+                                <span class="text-danger" id="orderStatusError"></span>
                             </div>
                             <div class="mb-3">
                                 <label for="paymentStatus" class="form-label">Payment Status</label>
-                                <select class="form-control" id="paymentStatus" name="paymentStatus">
+                                <select class="form-control" id="paymentStatus" name="paymentStatus" data-validation="required">
+                                    <option value="">Select Payment Status</option>
                                     <option value="Payment Pending">Payment Pending</option>
                                     <option value="Payment Done">Payment Done</option>
                                 </select>
+                                <span class="text-danger" id="paymentStatusError"></span>
                             </div>
                             <button type="submit" class="btn btn-primary">Add Order</button>
                         </form>
@@ -196,6 +211,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 
     <!-- Bootstrap JS (Required for Modal) -->

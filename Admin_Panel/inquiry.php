@@ -1,6 +1,13 @@
 <?php
 include('index.php');
 ?>
+
+<script src="validation.js"></script>
+<script src="jquery-3.7.1.min.js"></script>
+<script src="jquery.validate.min.js"></script>
+<script src="additional-methods.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+
 <style>
     .table .btn {
         height: 48px;
@@ -219,31 +226,38 @@ include('index.php');
                         <form id="addInquiryForm">
                             <div class="mb-3">
                                 <label for="inquiryName" class="form-label">Name</label>
-                                <input type="text" class="form-control" id="inquiryName" required>
+                                <input type="text" class="form-control" id="inquiryName" name="inquiryName" data-validation="required alpha">
+                                <span class="text-danger" id="inquiryNameError"></span>
                             </div>
                             <div class="mb-3">
                                 <label for="inquiryEmail" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="inquiryEmail" required>
+                                <input type="email" class="form-control" id="inquiryEmail" name="inquiryEmail" data-validation="required email">
+                                <span class="text-danger" id="inquiryEmailError"></span>
                             </div>
                             <div class="mb-3">
                                 <label for="inquirySubject" class="form-label">Subject</label>
-                                <input type="text" class="form-control" id="inquirySubject" required>
+                                <input type="text" class="form-control" id="inquirySubject" name="inquirySubject" data-validation="required alpha">
+                                <span class="text-danger" id="inquirySubjectError"></span>
                             </div>
                             <div class="mb-3">
                                 <label for="inquiryMessage" class="form-label">Message</label>
-                                <textarea class="form-control" id="inquiryMessage" rows="3" required></textarea>
+                                <textarea class="form-control" id="inquiryMessage" name="inquiryMessage" rows="3" data-validation="required description"></textarea>
+                                <span class="text-danger" id="inquiryMessageError"></span>
                             </div>
                             <div class="mb-3">
                                 <label for="inquiryStatus" class="form-label">Status</label>
-                                <select class="form-control" id="inquiryStatus">
+                                <select class="form-control" id="inquiryStatus" name="inquiryStatus" data-validation="required">
+                                    <option value="">Select Status</option>
                                     <option value="Pending">Pending</option>
                                     <option value="Process">Process</option>
                                     <option value="Done">Done</option>
                                 </select>
+                                <span class="text-danger" id="inquiryStatusError"></span>
                             </div>
                             <div class="mb-3">
                                 <label for="inquiryDate" class="form-label">Received On</label>
-                                <input type="datetime-local" class="form-control" id="inquiryDate" required>
+                                <input type="datetime-local" class="form-control" id="inquiryDate" name="inquiryDate" data-validation="required">
+                                <span class="text-danger" id="inquiryDateError"></span>
                             </div>
                             <div class="mb-3 text-end">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>

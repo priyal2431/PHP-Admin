@@ -1,19 +1,16 @@
 <?php
 include('index.php');
 ?>
+
+<script src="validation.js"></script>
+<script src="jquery-3.7.1.min.js"></script>
+<script src="jquery.validate.min.js"></script>
+<script src="additional-methods.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+
 <style>
     .size {
         width: 25%;
-    }
-
-    .is-invalid {
-        border-color: #dc3545;
-        background-color: #f8d7da;
-    }
-
-    .is-invalid+.error {
-        color: #dc3545;
-        font-size: 0.875rem;
     }
 </style>
 <div class="col-11">
@@ -67,7 +64,7 @@ include('index.php');
 
                             <div class="mb-3">
                                 <label class="form-label">Description</label>
-                                <textarea class="form-control" id="productDesc" name="productDesc" rows="3" data-validation="required"></textarea>
+                                <textarea class="form-control" id="productDesc" name="productDesc" rows="3" data-validation="required description"></textarea>
                                 <span class="text-danger" id="productDescError"></span>
                             </div>
 

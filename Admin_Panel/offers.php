@@ -1,3 +1,13 @@
+<?php
+include('index.php');
+?>
+
+<script src="validation.js"></script>
+<script src="jquery-3.7.1.min.js"></script>
+<script src="jquery.validate.min.js"></script>
+<script src="additional-methods.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+
 <div class="modal" id="addProductModal">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -9,34 +19,39 @@
                 <form id="addProductForm">
                     <div class="mb-3">
                         <label for="addProductName" class="form-label">Product Name</label>
-                        <input type="text" class="form-control" id="addProductName" required>
+                        <input type="text" class="form-control" id="addProductName" name="addProductName" data-validation="required alpha">
+                        <span class="text-danger" id="addProductNameError"></span>
                     </div>
                     <div class="mb-3">
                         <label for="addProductDescription" class="form-label">Description</label>
-                        <input type="text" class="form-control" id="addProductDescription" required>
+                        <input type="text" class="form-control" id="addProductDescription" name="addProductDescription" data-validation="required description">
+                        <span class="text-danger" id="addProductDescriptionError"></span>
                     </div>
                     <div class="mb-3">
                         <label for="addProductPrice" class="form-label">Price</label>
-                        <input type="number" class="form-control" id="addProductPrice" required>
+                        <input type="number" class="form-control" id="addProductPrice" name="addProductPrice" data-validation="required numeric min" data-min="1">
+                        <span class="text-danger" id="addProductPriceError"></span>
                     </div>
                     <div class="mb-3">
                         <label for="addProductDiscount" class="form-label">Discount (%)</label>
-                        <input type="number" class="form-control" id="addProductDiscount" required>
+                        <input type="number" class="form-control" id="addProductDiscount" name="addProductDiscount" data-validation="required numeric min max" data-min="0" data-max="100">
+                        <span class="text-danger" id="addProductDiscountError"></span>
                     </div>
                     <div class="mb-3">
                         <label for="addProductStock" class="form-label">Stock</label>
-                        <input type="number" class="form-control" id="addProductStock" required>
+                        <input type="number" class="form-control" id="addProductStock" name="addProductStock" data-validation="required numeric min" data-min="1">
+                        <span class="text-danger" id="addProductStockError"></span>
                     </div>
-                    <button type="submit" class="btn btn-outline-success">Add Product</button>
+
+                    <input type="submit" class="btn btn-outline-primary" value="Add Product" id="addProductForm">
+
                 </form>
             </div>
         </div>
     </div>
 </div>
 
-<?php
-include('index.php');
-?>
+
 
 <!-- Styles -->
 <style>
@@ -100,19 +115,9 @@ include('index.php');
     .table-striped tbody tr:nth-child(even) {
         background-color: #ffffff;
     }
-
-    .is-invalid {
-        border-color: red;
-        background-color: #f8d7da;
-    }
-
-    .is-valid {
-        border-color: green;
-        background-color: #d4edda;
-    }
 </style>
 
-<div class="col-11">
+<div class=" col-11">
     <div class="container">
         <!-- Manage Order Section -->
         <div class="row mb-4">
@@ -124,7 +129,7 @@ include('index.php');
         <!-- Add Product Button -->
         <div class="row mb-4">
             <div class="col-12 text-end">
-                <button id="addProductBtn" class="btn btn-outline-success btn-sm">Add Product</button>
+                <button type="submit" id="addProductBtn" class="btn btn-primary">Add Product</button>
             </div>
         </div>
 
@@ -188,80 +193,8 @@ include('index.php');
     </div>
 </div>
 
-<script src="jquery-3.7.1.min.js"></script>
-<script src="jquery.validate.min.js"></script>
-<script src="additional-methods.min.js"></script>
 
 <script>
-    $(document).ready(function() {
-        $("#editProductForm").validate({
-            rules: {
-                productName: {
-                    required: true,
-                    minlength: 3,
-                    pattern: /^[A-Za-z0-9\s]+$/ // Fixed regular expression format
-                },
-                productDescription: {
-                    required: true,
-                    minlength: 10,
-                    pattern: /^[A-Za-z0-9\s,.!?-]+$/ // Fixed regular expression format
-                },
-                productPrice: {
-                    required: true,
-                    min: 0,
-                    number: true
-                },
-                productDiscount: {
-                    required: true,
-                    min: 0,
-                    max: 100
-                },
-                productStock: {
-                    required: true,
-                    min: 0,
-                    number: true
-                }
-            },
-            messages: {
-                productName: {
-                    required: "Please enter a product name.",
-                    minlength: "Product name must be at least 3 characters long.",
-                    pattern: "Product name can only contain letters, numbers, and spaces."
-                },
-                productDescription: {
-                    required: "Please provide a product description.",
-                    minlength: "Description must be at least 10 characters long.",
-                    pattern: "Description can contain letters, numbers, spaces, commas, periods, exclamation marks, and hyphens."
-                },
-                productPrice: {
-                    required: "Please enter a product price.",
-                    min: "Price must be a positive value.",
-                    number: "Please enter a valid number."
-                },
-                productDiscount: {
-                    required: "Please enter a discount.",
-                    min: "Discount must be a positive value.",
-                    max: "Discount cannot exceed 100%."
-                },
-                productStock: {
-                    required: "Please enter the stock quantity.",
-                    min: "Stock cannot be negative.",
-                    number: "Please enter a valid number."
-                }
-            },
-            highlight: function(element) {
-                $(element).addClass('is-invalid').removeClass('is-valid');
-            },
-            unhighlight: function(element) {
-                $(element).removeClass('is-invalid').addClass('is-valid');
-            },
-            submitHandler: function(form) {
-                // If validation passes, you can add custom submit logic here or just let it submit normally
-                form.submit();
-            }
-        });
-    });
-
     const products = [{
             name: 'shoes',
             description: '',
@@ -368,31 +301,31 @@ include('index.php');
 
     document.getElementById('addProductBtn').addEventListener('click', function() {
 
-        document.getElementById('addProductForm').reset();
+        //document.getElementById('addProductForm').reset();
 
 
         const myModal = new bootstrap.Modal(document.getElementById('addProductModal'));
         myModal.show();
     });
 
-    document.getElementById('addProductForm').addEventListener('submit', function(e) {
-        e.preventDefault();
+    // document.getElementById('addProductForm').addEventListener('submit', function(e) {
+    //     e.preventDefault();
 
-        const newProduct = {
-            name: document.getElementById('addProductName').value,
-            description: document.getElementById('addProductDescription').value,
-            price: parseFloat(document.getElementById('addProductPrice').value),
-            discount: parseFloat(document.getElementById('addProductDiscount').value),
-            stock: parseInt(document.getElementById('addProductStock').value),
-            status: 'Active'
-        };
+    //     const newProduct = {
+    //         name: document.getElementById('addProductName').value,
+    //         description: document.getElementById('addProductDescription').value,
+    //         price: parseFloat(document.getElementById('addProductPrice').value),
+    //         discount: parseFloat(document.getElementById('addProductDiscount').value),
+    //         stock: parseInt(document.getElementById('addProductStock').value),
+    //         status: 'Active'
+    //     };
 
-        products.push(newProduct);
-        renderProducts();
+    //     products.push(newProduct);
+    //     renderProducts();
 
-        const myModal = bootstrap.Modal.getInstance(document.getElementById('addProductModal'));
-        myModal.hide();
-    });
+    //     const myModal = bootstrap.Modal.getInstance(document.getElementById('addProductModal'));
+    //     myModal.hide();
+    // });
 
     renderProducts();
 </script>
