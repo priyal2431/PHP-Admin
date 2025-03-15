@@ -37,9 +37,7 @@ include('index.php');
                             </tr>
                         </thead>
                         <tbody id="shoesProductTableBody">
-
-
-                        </tbody>
+               </tbody>
                     </table>
                 </div>
             </div>

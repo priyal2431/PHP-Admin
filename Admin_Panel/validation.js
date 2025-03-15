@@ -99,7 +99,7 @@ $(document).ready(function () {
         }
     });
 
-    $("#submitUserForm, #submitCategoryForm","#productForm","#addInquiryForm","#addOrderForm").on("click", function (e) {
+    $("#userForm").on("click", function (e) {
         let form = $(this).closest("form");
         let isValid = true;
 
